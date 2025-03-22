@@ -1,0 +1,143 @@
+Date: 20/03/2025
+Practical No: 01
+Problem Specification: How to create the table & how to upload details.
+Implementation: 
+
+Ex-01
+
+Setting environment for using XAMPP for Windows.
+acer@DESKTOP-3JL9ANG c:\users\acer\desktop\xampp
+# mysql -u root -p
+Enter password:
+Welcome to the MariaDB monitor.  Commands end with ; or \g.
+Your MariaDB connection id is 8
+Server version: 10.4.32-MariaDB mariadb.org binary distribution
+
+Copyright (c) 2000, 2018, Oracle, MariaDB Corporation Ab and others.
+
+Type 'help;' or '\h' for help. Type '\c' to clear the current input statement.
+
+MariaDB [(none)]> SHOW databases;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mysql              |
+| performance_schema |
+| phpmyadmin         |
+| test               |
++--------------------+
+5 rows in set (0.002 sec)
+
+MariaDB [(none)]> CREATE database UOV;
+Query OK, 1 row affected (0.001 sec)
+
+MariaDB [(none)]> USE UOV;
+Database changed
+
+MariaDB [UOV]> DESC Students;
+ERROR 1146 (42S02): Table 'uov.students' doesn't exist
+MariaDB [UOV]> DESC Students;
+ERROR 1146 (42S02): Table 'uov.students' doesn't exist
+MariaDB [UOV]> DESC Students;CREATE TABLE Students (
+ERROR 1146 (42S02): Table 'uov.students' doesn't exist
+    ->     std_id VARCHAR(15) PRIMARY KEY,
+    ->     Name VARCHAR(50) NOT NULL,
+    ->     Course VARCHAR(10) NOT NULL,
+    ->     DOB DATE NOT NULL,
+    ->     City VARCHAR(50) NOT NULL
+    -> );
+Query OK, 0 rows affected (0.153 sec)
+
+MariaDB [UOV]> DESC Students;
++--------+-------------+------+-----+---------+-------+
+| Field  | Type        | Null | Key | Default | Extra |
++--------+-------------+------+-----+---------+-------+
+| std_id | varchar(15) | NO   | PRI | NULL    |       |
+| Name   | varchar(50) | NO   |     | NULL    |       |
+| Course | varchar(10) | NO   |     | NULL    |       |
+| DOB    | date        | NO   |     | NULL    |       |
+| City   | varchar(50) | NO   |     | NULL    |       |
++--------+-------------+------+-----+---------+-------+
+5 rows in set (0.027 sec)
+
+MariaDB [UOV]> INSERT INTO Students (std_id, Name, Course, DOB, City) VALUES
+    -> ('2022/ASP/01', 'Vithushan', 'AMC', '2003-04-28', 'Pollannaruwa'),
+    -> ('2022/ASP/02', 'Santhiya', 'AMC', '2003-11-08', 'Batticaloa'),
+    -> ('2022/IT/45', 'Sathan', 'IT', '2003-12-24', 'Vavuniya'),
+    -> ('2022/ASP/13', 'Mirunthikka', 'AMC', '2003-12-24', 'Vavuniya'),
+    -> ('2022/IT/13', 'Dipoja', 'IT', '2004-01-24', 'Jaffna');
+Query OK, 5 rows affected (0.089 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+MariaDB [UOV]> select * from Students;
++-------------+-------------+--------+------------+--------------+
+| std_id      | Name        | Course | DOB        | City         |
++-------------+-------------+--------+------------+--------------+
+| 2022/ASP/01 | Vithushan   | AMC    | 2003-04-28 | Pollannaruwa |
+| 2022/ASP/02 | Santhiya    | AMC    | 2003-11-08 | Batticaloa   |
+| 2022/ASP/13 | Mirunthikka | AMC    | 2003-12-24 | Vavuniya     |
+| 2022/IT/13  | Dipoja      | IT     | 2004-01-24 | Jaffna       |
+| 2022/IT/45  | Sathan      | IT     | 2003-12-24 | Vavuniya     |
++-------------+-------------+--------+------------+--------------+
+5 rows in set (0.001 sec)
+
+MariaDB [UOV]>
+
+
+
+
+
+Ex-02
+
+MariaDB [UOV]> Create table physician(PhysicianID CHAR(15),
+    -> Name VARCHAR(20),Position VARCHAR(30));
+Query OK, 0 rows affected (0.009 sec)
+
+MariaDB [UOV]> DESC physician;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| PhysicianID | char(15)    | YES  |     | NULL    |       |
+| Name        | varchar(20) | YES  |     | NULL    |       |
+| Position    | varchar(30) | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+3 rows in set (0.018 sec)
+
+MariaDB [UOV]> INSERT INTO physician VALUES('A1001','John Dorian','Staff Internist');
+Query OK, 1 row affected (0.052 sec)
+
+MariaDB [UOV]> INSERT INTO physician VALUES('A1002','Elliot Reid','Attending Physician');
+Query OK, 1 row affected (0.029 sec)
+
+MariaDB [UOV]> INSERT INTO physician VALUES('A1003','Christpher Turk','Surgical Attending Physician');
+Query OK, 1 row affected (0.055 sec)
+
+MariaDB [UOV]> INSERT INTO physician VALUES('A1004','Percival Cox','Senior Attending Physician');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [UOV]> INSERT INTO physician VALUES('A1005','Keith Dudemeister','MD Resident');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [UOV]> INSERT INTO physician VALUES('A1006','Molly Clock','Attending Psychiatrict');
+Query OK, 1 row affected (0.004 sec)
+
+MariaDB [UOV]> select * from physician;
++-------------+-------------------+------------------------------+
+| PhysicianID | Name              | Position                     |
++-------------+-------------------+------------------------------+
+| A1001       | John Dorian       | Staff Internist              |
+| A1002       | Elliot Reid       | Attending Physician          |
+| A1003       | Christpher Turk   | Surgical Attending Physician |
+| A1004       | Percival Cox      | Senior Attending Physician   |
+| A1005       | Keith Dudemeister | MD Resident                  |
+| A1006       | Molly Clock       | Attending Psychiatrict       |
++-------------+-------------------+------------------------------+
+6 rows in set (0.000 sec)
+
+
+
+
+Conclusion: We study how to Create the Database,table and  Insert Data into the Table,View the Data.
+
+	
