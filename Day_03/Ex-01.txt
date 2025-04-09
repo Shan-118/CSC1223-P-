@@ -1,0 +1,324 @@
+Date : 09/04/2025
+Practical No : 02
+Problem Specification: How to create the table & how to upload details,used Aggregate functions,MySQL conditions and clauses.
+Implementation: 
+
+MariaDB [(none)]> USE UOV;
+Database changed
+MariaDB [UOV]> SHOW tables;
++---------------+
+| Tables_in_uov |
++---------------+
+| human         |
+| patients      |
+| pations       |
+| person        |
+| students      |
++---------------+
+5 rows in set (0.001 sec)
+
+MariaDB [UOV]> DESC person;
++-------+-------------+------+-----+---------+-------+
+| Field | Type        | Null | Key | Default | Extra |
++-------+-------------+------+-----+---------+-------+
+| ID    | varchar(30) | NO   | PRI | NULL    |       |
+| NAME  | varchar(30) | YES  |     | NULL    |       |
+| AGE   | varchar(30) | YES  |     | NULL    |       |
+| GRADE | varchar(30) | YES  |     | NULL    |       |
+| CITY  | varchar(30) | YES  |     | NULL    |       |
++-------+-------------+------+-----+---------+-------+
+5 rows in set (0.015 sec)
+
+MariaDB [UOV]> select * FROM person;
++----+---------+------+-------+--------------+
+| ID | NAME    | AGE  | GRADE | CITY         |
++----+---------+------+-------+--------------+
+| 1  | alice   | 20   | A     | new york     |
+| 2  | bob     | 22   | B     | chicago      |
+| 3  | charlie | 21   | A     | new york     |
+| 4  | david   | 23   | C     | boston       |
+| 5  | emma    | 22   | B     | chicago      |
+| 6  | frank   | 20   | A     | los angelese |
++----+---------+------+-------+--------------+
+6 rows in set (0.032 sec)
+
+MariaDB [UOV]> select ID,NAME FROM person;
++----+---------+
+| ID | NAME    |
++----+---------+
+| 1  | alice   |
+| 2  | bob     |
+| 3  | charlie |
+| 4  | david   |
+| 5  | emma    |
+| 6  | frank   |
++----+---------+
+6 rows in set (0.001 sec)
+
+MariaDB [UOV]> select AGE,CITY FROM person;
++------+--------------+
+| AGE  | CITY         |
++------+--------------+
+| 20   | new york     |
+| 22   | chicago      |
+| 21   | new york     |
+| 23   | boston       |
+| 22   | chicago      |
+| 20   | los angelese |
++------+--------------+
+6 rows in set (0.000 sec)
+
+MariaDB [UOV]> select * from person WHERE GRADE ='A'
+    -> ;
++----+---------+------+-------+--------------+
+| ID | NAME    | AGE  | GRADE | CITY         |
++----+---------+------+-------+--------------+
+| 1  | alice   | 20   | A     | new york     |
+| 3  | charlie | 21   | A     | new york     |
+| 6  | frank   | 20   | A     | los angelese |
++----+---------+------+-------+--------------+
+3 rows in set (0.000 sec)
+
+MariaDB [UOV]> SELECT NAME,GRADE FROM person WHERE grade='A';
++---------+-------+
+| NAME    | GRADE |
++---------+-------+
+| alice   | A     |
+| charlie | A     |
+| frank   | A     |
++---------+-------+
+3 rows in set (0.000 sec)
+MariaDB [UOV]> select name,city from person WHERE city='chicago';
++------+---------+
+| name | city    |
++------+---------+
+| bob  | chicago |
+| emma | chicago |
++------+---------+
+2 rows in set (0.000 sec)
+
+MariaDB [UOV]> select * from person WHERE age BETWEEN 20 and 22;
++----+---------+------+-------+--------------+
+| ID | NAME    | AGE  | GRADE | CITY         |
++----+---------+------+-------+--------------+
+| 1  | alice   | 20   | A     | new york     |
+| 2  | bob     | 22   | B     | chicago      |
+| 3  | charlie | 21   | A     | new york     |
+| 5  | emma    | 22   | B     | chicago      |
+| 6  | frank   | 20   | A     | los angelese |
++----+---------+------+-------+--------------+
+5 rows in set (0.000 sec)
+
+MariaDB [UOV]> select city from person ;
++--------------+
+| city         |
++--------------+
+| new york     |
+| chicago      |
+| new york     |
+| boston       |
+| chicago      |
+| los angelese |
++--------------+
+6 rows in set (0.000 sec)
+MariaDB [UOV]> select DISTINCT city from person;
++--------------+
+| city         |
++--------------+
+| new york     |
+| chicago      |
+| boston       |
+| los angelese |
++--------------+
+4 rows in set (0.001 sec)
+
+MariaDB [UOV]> select * from person WHERE name='alice';
++----+-------+------+-------+----------+
+| ID | NAME  | AGE  | GRADE | CITY     |
++----+-------+------+-------+----------+
+| 1  | alice | 20   | A     | new york |
++----+-------+------+-------+----------+
+1 row in set (0.000 sec)
+
+MariaDB [UOV]> select * from person WHERE name like '%e';
++----+---------+------+-------+----------+
+| ID | NAME    | AGE  | GRADE | CITY     |
++----+---------+------+-------+----------+
+| 1  | alice   | 20   | A     | new york |
+| 3  | charlie | 21   | A     | new york |
++----+---------+------+-------+----------+
+2 rows in set (0.000 sec)
+
+MariaDB [UOV]> select * from person WHERE name like '%i%';
++----+---------+------+-------+----------+
+| ID | NAME    | AGE  | GRADE | CITY     |
++----+---------+------+-------+----------+
+| 1  | alice   | 20   | A     | new york |
+| 3  | charlie | 21   | A     | new york |
+| 4  | david   | 23   | C     | boston   |
++----+---------+------+-------+----------+
+3 rows in set (0.000 sec)
+
+MariaDB [UOV]> select * from person WHERE name like 'c%';
++----+---------+------+-------+----------+
+| ID | NAME    | AGE  | GRADE | CITY     |
++----+---------+------+-------+----------+
+| 3  | charlie | 21   | A     | new york |
++----+---------+------+-------+----------+
+1 row in set (0.000 sec)
+
+MariaDB [UOV]> select name from person WHERE city like 'new%';
++---------+
+| name    |
++---------+
+| alice   |
+| charlie |
++---------+
+2 rows in set (0.000 sec)
+MariaDB [UOV]> select * from person WHERE city ='NEW YORK' OR grade='A';
++----+---------+------+-------+--------------+
+| ID | NAME    | AGE  | GRADE | CITY         |
++----+---------+------+-------+--------------+
+| 1  | alice   | 20   | A     | new york     |
+| 3  | charlie | 21   | A     | new york     |
+| 6  | frank   | 20   | A     | los angelese |
++----+---------+------+-------+--------------+
+3 rows in set (0.000 sec)
+
+MariaDB [UOV]> select * from person WHERE NOT grade='A';
++----+-------+------+-------+---------+
+| ID | NAME  | AGE  | GRADE | CITY    |
++----+-------+------+-------+---------+
+| 2  | bob   | 22   | B     | chicago |
+| 4  | david | 23   | C     | boston  |
+| 5  | emma  | 22   | B     | chicago |
++----+-------+------+-------+---------+
+3 rows in set (0.000 sec)
+
+MariaDB [UOV]> SELECT * from person LIMIT 3;
++----+---------+------+-------+----------+
+| ID | NAME    | AGE  | GRADE | CITY     |
++----+---------+------+-------+----------+
+| 1  | alice   | 20   | A     | new york |
+| 2  | bob     | 22   | B     | chicago  |
+| 3  | charlie | 21   | A     | new york |
++----+---------+------+-------+----------+
+3 rows in set (0.000 sec)
+MariaDB [UOV]> select * from person WHERE city!='new york' AND city!='los angelese';
++----+-------+------+-------+---------+
+| ID | NAME  | AGE  | GRADE | CITY    |
++----+-------+------+-------+---------+
+| 2  | bob   | 22   | B     | chicago |
+| 4  | david | 23   | C     | boston  |
+| 5  | emma  | 22   | B     | chicago |
++----+-------+------+-------+---------+
+3 rows in set (0.000 sec)
+MariaDB [UOV]> SELECT COUNT(id) from person;
++-----------+
+| COUNT(id) |
++-----------+
+|         6 |
++-----------+
+MariaDB [UOV]> select * from person WHERE city NOT IN('new york','los angelese');
++----+-------+------+-------+---------+
+| ID | NAME  | AGE  | GRADE | CITY    |
++----+-------+------+-------+---------+
+| 2  | bob   | 22   | B     | chicago |
+| 4  | david | 23   | C     | boston  |
+| 5  | emma  | 22   | B     | chicago |
++----+-------+------+-------+---------+
+3 rows in set (0.000 sec)
+
+
+MariaDB [UOV]> select MIN(age) from person;
++----------+
+| MIN(age) |
++----------+
+| 20       |
++----------+
+1 row in set (0.000 sec)
+
+MariaDB [UOV]> select MAX(age) from person;
++----------+
+| MAX(age) |
++----------+
+| 23       |
++----------+
+1 row in set (0.000 sec)
+
+MariaDB [UOV]> select AVG(age) from person;
++--------------------+
+| AVG(age)           |
++--------------------+
+| 21.333333333333332 |
++--------------------+
+1 row in set (0.000 sec)
+
+MariaDB [UOV]> select UPPER(name) from person;
++-------------+
+| UPPER(name) |
++-------------+
+| ALICE       |
+| BOB         |
+| CHARLIE     |
+| DAVID       |
+| EMMA        |		
+| FRANK       |
++-------------+
+6 rows in set (0.000 sec)
+
+MariaDB [UOV]> select LOWER(name) from person;
++-------------+
+| LOWER(name) |
++-------------+
+| alice       |
+| bob         |
+| charlie     |
+| david       |
+| emma        |
+| frank       |
++-------------+
+6 rows in set (0.000 sec)
+MariaDB [UOV]> select name as person_name from person;
++-------------+
+| person_name |
++-------------+
+| alice       |
+| bob         |
+| charlie     |
+| david       |
+| emma        |
+| frank       |
++-------------+
+6 rows in set (0.000 sec)
+
+MariaDB [UOV]> select * from person;
++----+---------+------+-------+--------------+
+| ID | NAME    | AGE  | GRADE | CITY         |
++----+---------+------+-------+--------------+
+| 1  | alice   | 20   | A     | new york     |
+| 2  | bob     | 22   | B     | chicago      |
+| 3  | charlie | 21   | A     | new york     |
+| 4  | david   | 23   | C     | boston       |
+| 5  | emma    | 22   | B     | chicago      |
+| 6  | frank   | 20   | A     | los angelese |
++----+---------+------+-------+--------------+
+6 rows in set (0.000 sec)
+
+
+Conclusion:We studied about select records,used aggregate functions ,mysql condions and clauses.
+These select records are save in temporaly , not save permanantly.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
