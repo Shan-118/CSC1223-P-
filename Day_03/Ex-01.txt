@@ -1,5 +1,5 @@
 Date : 09/04/2025
-Practical No : 02
+Practical No : 03
 Problem Specification: How to create the table & how to upload details,used Aggregate functions,MySQL conditions and clauses.
 Implementation: 
 
